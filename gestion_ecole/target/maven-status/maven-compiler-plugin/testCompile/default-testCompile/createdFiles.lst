@@ -1,0 +1,5 @@
+com\example\dao\ReservationsDAOTest.class
+com\example\dao\SalleDAOTest.class
+com\example\dao\TerrainDAOTest.class
+com\example\dao\UtilisateurDAOTest.class
+com\example\dao\EvenementTests.class

@@ -45,4 +45,17 @@ public class Utilisateur {
     void setEmail(String email){
         this.email = email;
     }
+    void setNom(String nom){
+        this.nom = nom;
     }
+    void setPrenom(String prenom){
+        this.prenom = prenom;
+    }
+    void setType(String type){
+        this.type = type;
+    }
+    void setIdUser(int idUser){
+        this.idUser = idUser;
+    }
+    
+}

@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.dao.impl.GenericDAO;
 import com.example.model.Utilisateur;
 import com.example.util.PostgreSQLConnection;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class UtilisateurDAO implements GenericDAO<Utilisateur> {
 
     @Override
@@ -65,12 +65,12 @@ public class UtilisateurDAO implements GenericDAO<Utilisateur> {
 
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
+                int id_user = resultSet.getInt("id_user");
                 String nom = resultSet.getString("nom");
                 String prenom = resultSet.getString("prenom");
                 String email = resultSet.getString("email");
                 String type = resultSet.getString("type");
-                utilisateurList.add(new Utilisateur(idUser, nom, prenom, email, type));
+                utilisateurList.add(new Utilisateur(id_user, nom, prenom, email, type));
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la récupération des utilisateurs");

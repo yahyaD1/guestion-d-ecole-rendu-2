@@ -11,6 +11,7 @@ import java.util.List;
 import com.example.model.Evenements;
 import com.example.util.PostgreSQLConnection;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class EvenementDAO implements GenericDAO<Evenements> {
 
     @Override
@@ -24,11 +25,11 @@ public class EvenementDAO implements GenericDAO<Evenements> {
                     String sql = "INSERT INTO evenements (nom_event, date_event, description, id_user) VALUES (?, ?, ?, ?)";
                     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                         stmt.setString(1, event.getNom());
-                        stmt.setString(2, event.getDate());
+                        stmt.setDate(2, java.sql.Date.valueOf(event.getDate()));
                         stmt.setString(3, event.getDescription());
                         stmt.setInt(4, event.getUserId());
                         stmt.executeUpdate();
-                        System.out.println("Evenement ajouté avec succès.");
+                        System.out.println("Evenement est ajoute.");
                     }
                 } else {
                     throw new SQLException("Utilisateur inexistant.");
@@ -50,7 +51,7 @@ public class EvenementDAO implements GenericDAO<Evenements> {
                     return new Evenements(
                         rs.getInt("id_event"),
                         rs.getString("nom_event"),
-                        rs.getString("date_event"),
+                        rs.getDate("date_event").toLocalDate(),
                         rs.getString("description"),
                         rs.getInt("id_user")
                     );
@@ -73,7 +74,7 @@ public class EvenementDAO implements GenericDAO<Evenements> {
                 Evenements event = new Evenements(
                     resultats.getInt("id_event"),
                     resultats.getString("nom_event"),
-                    resultats.getString("date_event"),
+                    resultats.getDate("date_event").toLocalDate(),
                     resultats.getString("description"),
                     resultats.getInt("id_user")
                 );
@@ -91,12 +92,12 @@ public class EvenementDAO implements GenericDAO<Evenements> {
         try (Connection conn = PostgreSQLConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, event.getNom());
-            stmt.setString(2, event.getDate());
+            stmt.setDate(2, java.sql.Date.valueOf(event.getDate()));
             stmt.setString(3, event.getDescription());
             stmt.setInt(4, event.getUserId());
             stmt.setInt(5, event.getId());
             stmt.executeUpdate();
-            System.out.println("Evenement modifié avec succès.");
+            System.out.println("Evenement est modifie.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,7 +110,7 @@ public class EvenementDAO implements GenericDAO<Evenements> {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("Evenement supprimé avec succès.");
+            System.out.println("Evenement est supprime.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

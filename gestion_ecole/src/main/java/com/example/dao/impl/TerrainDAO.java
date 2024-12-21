@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.dao.impl.GenericDAO;
 import com.example.model.Terrain;
 import com.example.util.PostgreSQLConnection;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class TerrainDAO implements GenericDAO<Terrain> {
 
     @Override

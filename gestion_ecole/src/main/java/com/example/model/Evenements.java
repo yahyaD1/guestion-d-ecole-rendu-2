@@ -1,15 +1,17 @@
 package com.example.model;
 
+import java.time.LocalDate;
+
 public class Evenements {
     private int id_event;
     private String nom_event;
-    private String date_event;
+    private LocalDate date_event;
     private String description;
     private int id_user;
     
     public Evenements() {}
 
-    public Evenements(int id_event,String nom, String date, String description, int userId) {
+    public Evenements(int id_event,String nom, LocalDate date, String description, int userId) {
         this.id_event=id_event;
         this.nom_event = nom;
         this.date_event = date;
@@ -21,6 +23,7 @@ public class Evenements {
     public int getId() {
         return id_event;
     }
+
 
     public void setId(int id_event) {
         this.id_event = id_event;
@@ -34,11 +37,11 @@ public class Evenements {
         this.nom_event = nom;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date_event;
     }
     
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
     	this.date_event=date;
     }
 
@@ -52,6 +55,9 @@ public class Evenements {
 
     public int getUserId() {
         return id_user;
+    }
+    public void setIdUser(int id_user){
+        this.id_user=id_user;
     }
 
 }

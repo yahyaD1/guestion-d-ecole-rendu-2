@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.dao.impl.GenericDAO;
 import com.example.model.Reservations;
 import com.example.util.PostgreSQLConnection;
 
@@ -25,10 +24,10 @@ public class ReservationsDAO implements GenericDAO<Reservations> {
             stmt.setInt(3, id_terrain);
 
             try (ResultSet resultSet = stmt.executeQuery()) {
-                return !resultSet.next(); // Return true if no reservation found
+                return !resultSet.next(); 
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la vérification de disponibilité : " + e.getMessage());
+            System.err.println("Erreur lors de la verification de disponibilité : " + e.getMessage());
             return false;
         }
     }
@@ -43,7 +42,7 @@ public class ReservationsDAO implements GenericDAO<Reservations> {
             stmt.setInt(2, reservation.getId_event());
             stmt.setInt(3, reservation.getId_salle());
             stmt.setInt(4, reservation.getId_terrain());
-            stmt.setDate(5, reservation.getDate_reservation());
+            stmt.setDate(5, java.sql.Date.valueOf(reservation.getDate_reservation()));
 
             stmt.executeUpdate();
             System.out.println("Réservation ajoutée avec succès.");
@@ -68,7 +67,7 @@ public class ReservationsDAO implements GenericDAO<Reservations> {
                         resultSet.getInt("id_event"),
                         resultSet.getInt("id_salle"),
                         resultSet.getInt("id_terrain"),
-                        resultSet.getDate("date_reservation")
+                        resultSet.getDate("date_reservation").toLocalDate()
                     );
                 }
             }
@@ -93,7 +92,7 @@ public class ReservationsDAO implements GenericDAO<Reservations> {
                     resultSet.getInt("id_event"),
                     resultSet.getInt("id_salle"),
                     resultSet.getInt("id_terrain"),
-                    resultSet.getDate("date_reservation")
+                    resultSet.getDate("date_reservation").toLocalDate()
                 ));
             }
         } catch (SQLException e) {
@@ -112,7 +111,7 @@ public class ReservationsDAO implements GenericDAO<Reservations> {
             stmt.setInt(2, reservation.getId_event());
             stmt.setInt(3, reservation.getId_salle());
             stmt.setInt(4, reservation.getId_terrain());
-            stmt.setDate(5, reservation.getDate_reservation());
+            stmt.setDate(5, java.sql.Date.valueOf(reservation.getDate_reservation()));
             stmt.setInt(6, reservation.getId_reservation());
 
             int rowsAffected = stmt.executeUpdate();

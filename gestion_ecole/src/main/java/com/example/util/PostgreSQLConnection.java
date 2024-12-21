@@ -1,31 +1,25 @@
 package com.example.util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class PostgreSQLConnection {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/java_gestion_project";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "0000";
-    private static Connection connection = null;
+    private static Connection mockConnection;
 
     public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Connection to PostgreSQL database established!");
+        if (mockConnection != null) {
+            return mockConnection;
         }
-        return connection;
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/java_gestion_project", "postgres", "0000");
     }
 
-    public static void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Connection closed.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void setMockConnection(Connection connection) {
+        mockConnection = connection;
+    }
+
+    public static void clearMockConnection() {
+        mockConnection = null;
     }
 }

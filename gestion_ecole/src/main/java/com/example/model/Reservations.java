@@ -1,6 +1,6 @@
 package com.example.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Reservations {
     private int id_reservation;
@@ -8,9 +8,9 @@ public class Reservations {
     private int id_event;
     private int id_salle;
     private int id_terrain;
-    private Date date_reservation; 
+    private LocalDate date_reservation; 
 
-    public Reservations(int id_reservation ,int id_user, int id_event, int id_salle, int id_terrain, Date date_reservation) {
+    public Reservations(int id_reservation ,int id_user, int id_event, int id_salle, int id_terrain, LocalDate date_reservation) {
         this.id_reservation=id_reservation;
         this.id_user = id_user;
         this.id_event = id_event;
@@ -18,6 +18,7 @@ public class Reservations {
         this.id_terrain = id_terrain;
         this.date_reservation = date_reservation;
     }
+
 
     public Reservations() {
     }
@@ -62,11 +63,11 @@ public class Reservations {
         this.id_terrain = id_terrain;
     }
 
-    public Date getDate_reservation() {
+    public LocalDate getDate_reservation() {
         return date_reservation;
     }
 
-    public void setDate_reservation(Date date_reservation) {
+    public void setDate_reservation(LocalDate date_reservation) {
         this.date_reservation = date_reservation;
     }
 
